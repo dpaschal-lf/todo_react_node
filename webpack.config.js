@@ -12,14 +12,14 @@ module.exports = {
 		port: 3001,
 	},
 	module: {
-		rules: [
+		rules: {
 			test: /\.jsx?$/,
 			exclude: /node_modules/,
 			loader: 'babel-loader',
 			query: {
 				presets: ['es2015','react']
 			}
-		]
+		}
 	},
 	plugins: [
 		new HTMLWebpackPlugin({ template: './index.html'})
