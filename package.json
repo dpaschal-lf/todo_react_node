@@ -1,33 +1,33 @@
 {
   "name": "todo_react_node",
   "version": "1.0.0",
-  "description": "todo app with react front end and node backend",
-  "main": "index.js",
+  "description": "",
+  "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --mode development"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dpaschal-lf/todo_react_node.git"
   },
-  "author": "daniel paschal",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dpaschal-lf/todo_react_node/issues"
   },
   "homepage": "https://github.com/dpaschal-lf/todo_react_node#readme",
-  "dependencies": {
+  "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@babel/cli": "^6.26.3",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "html-webpack-plugin": "^3.2.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   }
 }
