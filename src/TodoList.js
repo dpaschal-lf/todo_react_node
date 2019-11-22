@@ -7,6 +7,9 @@ class TodoList extends React.Component{
 
         };
     }
+    componentDidMount(){
+        console.log('loaded');
+    }
     render(){
         return(<div>list</div>)
     }

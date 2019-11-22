@@ -3,6 +3,7 @@ import './TodoApp.css';
 import {Switch, Route} from 'react-router-dom';
 import TodoList from './TodoList';
 import TodoDetails from './TodoDetails';  
+import TodoCreate from './TodoCreate';
 
 class TodoApp extends React.Component{
   constructor(props){
@@ -11,12 +12,14 @@ class TodoApp extends React.Component{
   render(){
     return(
       <div className="todoApp">
+        <h1>Todo App</h1>
         <Switch>
           <Route exact path={['/','/list']} component={TodoList}/ >
           <Route path='/create' component={TodoCreate}/ >
           <Route path='/edit/:id' component={TodoCreate}/ >
           <Route path='/details/:id' component={TodoDetails}/ >
         </Switch>
+        <footer>instructions</footer>
       </div>
     );
   }
