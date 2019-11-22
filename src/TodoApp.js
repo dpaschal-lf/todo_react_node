@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './TodoApp.css';
 import {Switch, Route} from 'react-router-dom';
-import TodoList from 'TodoList';
-import TodoListDetails from 'TodoListDetails';
+import TodoList from './TodoList';
+import TodoDetails from './TodoDetails';  
 
 class TodoApp extends React.Component{
   constructor(props){
@@ -11,9 +10,12 @@ class TodoApp extends React.Component{
   }
   render(){
     return(
-      <div class="todoApp">
+      <div className="todoApp">
         <Switch>
-          <Route path="/(/|list)/ component={TodoList}">
+          <Route exact path={['/','/list']} component={TodoList}/ >
+          <Route path='/create' component={TodoCreate}/ >
+          <Route path='/edit/:id' component={TodoCreate}/ >
+          <Route path='/details/:id' component={TodoDetails}/ >
         </Switch>
       </div>
     );
