@@ -1,17 +1,30 @@
 import React from 'react'; 
+import TodoListItem from './TodoListItem';
 
 class TodoList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-
+            data: []
         };
     }
     componentDidMount(){
-        console.log('loaded');
+        fetch('http://localhost:5000/api/items')
+            .then( res => res.json() )
+            .then( data => {
+                debugger;
+                this.setState({
+                    data
+                });
+            })
     }
     render(){
-        return(<div>list</div>)
+        return(<div>
+            { !this.state.data.length 
+                ? 'no data available' 
+                : this.state.data.map( data=> <TodoListItem data={data} key={data.id}/> )
+            }
+        </div>)
     }
 }
 
