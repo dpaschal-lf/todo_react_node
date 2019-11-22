@@ -12,7 +12,6 @@ class TodoList extends React.Component{
         fetch('http://localhost:5000/api/items')
             .then( res => res.json() )
             .then( data => {
-                debugger;
                 this.setState({
                     data
                 });
