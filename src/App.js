@@ -1,16 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodoApp from './TodoApp.js';
 
-class TodoApp extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    return(
-      <div>app</div>
-    );
-  }
+const App = (props)=> {
+    return (<TodoApp />);
 }
 
-export default TodoApp;
+export default App;
