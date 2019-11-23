@@ -32,7 +32,7 @@ class TodoDetails extends React.Component{
                 token: localStorage.getItem('userToken')
             }
         })
-            .then( ()=>{
+            .then( (res)=>{
                 handleToken( res );
                 this.props.history.push('/list');
             } )
