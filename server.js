@@ -16,7 +16,7 @@ const db = mysql.createConnection( mysqlCredentials );
 server.get('/api/items', (req,res)=>{
     db.connect( (error)=>{
         if(error){
-            res.status(500).send( error.message );
+            res.sendStatus(500).send( error.message );
             return;
         }
         const query = 'SELECT `title`, `added`, `id`, `completed` FROM `items`';
@@ -24,7 +24,7 @@ server.get('/api/items', (req,res)=>{
             if(!error){
                 res.send(data);
             } else {
-                res.status(500).send(error);
+                res.sendStatus(500).send(error);
             }
         });
     });
@@ -33,18 +33,18 @@ server.get('/api/items', (req,res)=>{
 server.get('/api/items/:id', (req,res)=>{
     db.connect( (error)=>{
         if(error){
-            res.status(500).send( error.message );
+            res.sendStatus(500).send( error.message );
             return;
         }
         if(isNaN(req.params.id)){
-            res.status(500).send( `id ${req.params.id} is not a number` );
+            res.sendStatus(500).send( `id ${req.params.id} is not a number` );
         }
         const query = 'SELECT `title`, `added`, `id`, `completed`, `description` FROM `items` WHERE `id`=?';
         db.query( query, [req.params.id], (error, data) =>{
             if(!error){
                 res.send(data);
             } else {
-                res.status(404).send(`cannot find record for id ${req.params.id}`)
+                res.sendStatus(404).send(`cannot find record for id ${req.params.id}`)
             }
         });
     });
@@ -53,11 +53,11 @@ server.get('/api/items/:id', (req,res)=>{
 server.delete('/api/items/:id', (req,res)=>{
     db.connect( (error)=>{
         if(error){
-            res.status(500).send( error.message );
+            res.sendStatus(500).send( error.message );
             return;
         }
         if(isNaN(req.params.id)){
-            res.status(500).send( `id ${req.params.id} is not a number` );
+            res.sendStatus(500).send( `id ${req.params.id} is not a number` );
         }
         const query = 'DELETE FROM `items` WHERE `id`=?';
         db.query( query, [req.params.id], (error) =>{
