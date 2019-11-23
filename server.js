@@ -56,8 +56,8 @@ server.get('/api/items/:id', (req,res)=>{
     if(isNaN(req.params.id)){
         res.status(500).send( `id ${req.params.id} is not a number` );
     }
-    const query = 'SELECT `title`, `added`, `id`, `completed`, `description` FROM `items` WHERE `id`=?';
-    req.db.query( query, [req.params.id], (error, data) =>{
+    const query = 'SELECT `title`, `added`, `id`, `completed`, `description` FROM `items` WHERE `id`=? AND `userID`=?';
+    req.db.query( query, [req.params.id, req.userID], (error, data) =>{
         if(!error){
             res.send(data);
         } else {
@@ -70,8 +70,8 @@ server.delete('/api/items/:id', (req,res)=>{
     if(isNaN(req.params.id)){
         res.status(500).send( `id ${req.params.id} is not a number` );
     }
-    const query = 'DELETE FROM `items` WHERE `id`=?';
-    req.db.query( query, [req.params.id], (error) =>{
+    const query = 'DELETE FROM `items` WHERE `id`=? AND `userID`=?';
+    req.db.query( query, [req.params.id, req.userID], (error) =>{
         console.log('delete: ',error);
         if(!error){
             res.sendState(200);
@@ -92,8 +92,8 @@ server.post('/api/items/', (req,res)=>{
             return;
         }
     }
-    const query = 'INSERT INTO `items` SET `title`=?, `description`=?, `userID`=0, `added`=NOW(), `completed`="active"';
-    req.db.query( query, [req.body.title, req.body.description], (error) =>{
+    const query = 'INSERT INTO `items` SET `title`=?, `description`=?, `userID`=?, `added`=NOW(), `completed`="active"';
+    req.db.query( query, [req.body.title, req.body.description,req.userID], (error) =>{
         if(!error){
             res.sendStatus(200);
             return;
