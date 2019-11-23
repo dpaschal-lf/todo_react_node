@@ -81,10 +81,7 @@ server.delete('/api/items/:id', (req,res)=>{
     });
 })
 
-server.post('/api/items/', (req,res)=>{
-    if(isNaN(req.params.id)){
-        res.status(500).send( `id ${req.params.id} is not a number` );
-    }   
+server.post('/api/items/', (req,res)=>{  
     const requiredFields = ['title','description'];
     for( let fieldIndex = 0; fieldIndex < requiredFields.length; fieldIndex++){
         if(req.body[requiredFields[fieldIndex]]===undefined){
