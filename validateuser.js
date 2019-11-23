@@ -3,7 +3,7 @@ module.exports = function( request, response, next ){
     let token = request.header('token');
     let userID = null
     const db= request.db;
-    if(token === undefined || token === 'null'){
+    if(token === undefined || token === null){
         token = '';
         let sourceCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         while(token.length < 40){
@@ -26,7 +26,7 @@ module.exports = function( request, response, next ){
         })
     } else {
         const query = 'SELECT `id` FROM `users` WHERE `key` = ?';
-        db.query(query, [$token], (error, data)=>{
+        db.query(query, [token], (error, data)=>{
             if(!error){
                 request.userID = data.id;
                 next();

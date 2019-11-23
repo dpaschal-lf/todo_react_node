@@ -16,6 +16,7 @@ class TodoList extends React.Component{
             }
         })
             .then( res => {
+                debugger;
                 handleToken( res );
                 return res.json();
             } )
