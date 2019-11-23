@@ -1,5 +1,4 @@
 const express = require('express');
-const mysql = require('mysql');
 const path = require('path');
 const cors = require('cors');
 
@@ -10,12 +9,30 @@ const staticModule = express.static(path.normalize(__dirname+'../public'));
 server.use( staticModule );
 server.use( cors() );
 
+const mysql = require('mysql');
+const mysqlCredentials = require('./credentials.js');
+const db = mysql.createConnection( mysqlCredentials );
+
 server.get('/api/items', (req,res)=>{
-    res.send([{"title":"this is a test todo in mysql","added":"2019-05-02 00:00:00","id":"1","completed":"active"},{"title":"get eggs","added":"2019-07-02 00:00:00","id":"2","completed":"completed"},{"title":"test2","added":"2019-11-20 19:24:41","id":"3","completed":"completed"},{"title":"make an example","added":"2019-11-20 19:25:59","id":"4","completed":"completed"}]);
+    db.connect( ()=>{
+        const query = 'SELECT `title`, `added`, `id`, `completed` FROM `items`';
+        db.query( query, (error, data) =>{
+            if(!error){
+                res.send(data);
+            }
+        });
+    });
 })
 
 server.get('/api/items/:id', (req,res)=>{
-    res.send({"title":"get eggs","added":"2019-07-02 00:00:00","id":"2","completed":"completed","description":"the big eggs"});
+    db.connect( ()=>{
+        const query = 'SELECT `title`, `added`, `id`, `completed`, `description` FROM `items` WHERE `id`=?';
+        db.query( query, [this.params.id], (error, data) =>{
+            if(!error){
+                res.send(data);
+            }
+        });
+    });
 })
 
 server.delete('/api/items/:id', (req,res)=>{
