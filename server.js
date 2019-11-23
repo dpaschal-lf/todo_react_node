@@ -16,8 +16,17 @@ server.use( (req, res, next )=>{
     req.db = db;
     next();
 })
+//yes, I know cors also does this, as illustrated below.
+server.use( (req, res, next)=>{
+    res.header('Access-Control-Expose-Headers','userToken');
+    next();
+})
+
 server.use( staticModule );
 server.use( cors() );
+// server.use(cors({
+//     exposedHeaders: ['userToken'],
+//   }));
 server.use( bodyParser.json() );
 server.use( validateUser );
 server.use(function (err, req, res, next) {

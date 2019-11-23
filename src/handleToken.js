@@ -1,6 +1,7 @@
 
 export default function( res ){
-        if(res.headers.hasOwnProperty('userToken')){
-        localStorage.userToken = res.headers.userToken;
+    const token = res.headers.get('userToken')
+    if(token){
+        localStorage.userToken = token;
     }
 }

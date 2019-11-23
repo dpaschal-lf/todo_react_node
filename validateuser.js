@@ -3,7 +3,7 @@ module.exports = function( request, response, next ){
     let token = request.header('token');
     let userID = null
     const db= request.db;
-    if(token === undefined || token === null){
+    if(token === undefined || token === 'null'){
         token = '';
         let sourceCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         while(token.length < 40){
@@ -14,6 +14,7 @@ module.exports = function( request, response, next ){
         
         db.connect( ()=>{
             const query = "INSERT INTO `users` SET `key`= '"+token+"', `added`=NOW()";
+            console.log('made new token: ' + token)
             db.query(query, (error, result )=>{
                 if(!error){
                     request.userID = result.insertId;
@@ -26,13 +27,15 @@ module.exports = function( request, response, next ){
         })
     } else {
         const query = 'SELECT `id` FROM `users` WHERE `key` = ?';
-        db.query(query, [token], (error, data)=>{
-            if(!error){
-                request.userID = data.id;
-                next();
-            } else {
-                next('invalid token '+ token);
-            }
-        })
+        db.connect( ()=>{
+            db.query(query, [token], (error, data)=>{
+                if(!error){
+                    request.userID = data.id;
+                    next();
+                } else {
+                    next('invalid token '+ token);
+                }
+            })
+        });
     }
 }
