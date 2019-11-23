@@ -11,7 +11,6 @@ class Modal extends React.Component{
         }
     }
     componentDidUpdate( oldProps, oldState ){
-        debugger;
         if(oldProps.display !== this.props.display){
             this.setState({
                 display: this.props.display

@@ -36,7 +36,6 @@ class TodoDetails extends React.Component{
         })
     }
     confirmDelete(){
-        debugger;
         this.setState({
             modalMessage: <React.Fragment>
                 You are about to delete <em>{this.state.data.title}</em>
@@ -70,7 +69,7 @@ class TodoDetails extends React.Component{
                 </div>
                 <div name="description" className="description">{this.state.data.description}</div>
                 <input type="datetime-local" name="added" className="added" value={this.state.data.added}/>
-                <Modal display={this.state.modalMessage!==null}>
+                <Modal closeCallback={this.hideModal} display={this.state.modalMessage!==null}>
                     {this.state.modalMessage}
                 </Modal>
             </div>

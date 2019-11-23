@@ -1,5 +1,5 @@
 
-.modal .shadow{
+.modal.shadow{
     position: fixed;
     left: 0;
     top: 0;
@@ -20,4 +20,13 @@
     margin: auto;
     display: inline-block;
     text-align: center;
+}
+.modal .close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: black;
+    color: white;
+    padding: 1px;
+    cursor: pointer;
 }
