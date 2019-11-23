@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const validateUser = require('./validateuser.js');
 
 const server = express();
 
@@ -10,6 +11,7 @@ const staticModule = express.static(path.normalize(__dirname+'../public'));
 server.use( staticModule );
 server.use( cors() );
 server.use( bodyParser.json() );
+server.use( validateUser );
 server.use(function (err, req, res, next) {
     try{
         throw new Error(err);
