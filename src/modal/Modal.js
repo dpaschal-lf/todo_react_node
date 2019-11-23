@@ -1,5 +1,5 @@
-import {React} from 'react';
-import 'modal.css';
+import React from 'react';
+import './modal.css';
 
 class Modal extends React.Component{
     constructor(props){
@@ -11,11 +11,11 @@ class Modal extends React.Component{
         }
     }
     componentDidUpdate( oldProps, oldState ){
-        if(oldProps.display === this.props.display){
-            this.setState({
-                display: this.props.display
-            })
-        }
+        // if(oldProps.display === this.props.display){
+        //     this.setState({
+        //         display: this.props.display
+        //     })
+        // }
     }
     close(){
         this.props.closeCallback();

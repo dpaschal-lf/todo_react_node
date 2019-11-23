@@ -1,0 +1,23 @@
+
+.modal .shadow{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.4);
+}
+.modal .body{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2%;
+    background-color: white;
+    display: flex;
+}
+.modal .content{
+    margin: auto;
+    display: inline-block;
+    text-align: center;
+}

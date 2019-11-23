@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import handleToken from './handleToken';
+import Modal from './modal/Modal.js';
 
 class TodoDetails extends React.Component{
     constructor(props){
@@ -35,9 +36,10 @@ class TodoDetails extends React.Component{
         })
     }
     confirmDelete(){
+        debugger;
         this.setState({
             modalMessage: <React.Fragment>
-                You are about to delete <em>{this.data.title}</em>
+                You are about to delete <em>{this.state.data.title}</em>
                 <p>Are you sure?</p>
                 <span className="button" onClick={this.handleDelete}>Delete</span><span onClick={this.hideModal} className="button">Cancel</span>
             </React.Fragment>
@@ -68,6 +70,9 @@ class TodoDetails extends React.Component{
                 </div>
                 <div name="description" className="description">{this.state.data.description}</div>
                 <input type="datetime-local" name="added" className="added" value={this.state.data.added}/>
+                <Modal display={this.state.modalMessage!==null}>
+                    {this.state.modalMessage}
+                </Modal>
             </div>
         );
     }
