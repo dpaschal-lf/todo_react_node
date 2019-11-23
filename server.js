@@ -9,16 +9,22 @@ const staticModule = express.static(path.normalize(__dirname+'../public'));
 server.use( staticModule );
 server.use( cors() );
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const mysqlCredentials = require('./credentials.js');
 const db = mysql.createConnection( mysqlCredentials );
 
 server.get('/api/items', (req,res)=>{
-    db.connect( ()=>{
+    db.connect( (error)=>{
+        if(error){
+            res.send( error.message );
+            return;
+        }
         const query = 'SELECT `title`, `added`, `id`, `completed` FROM `items`';
         db.query( query, (error, data) =>{
             if(!error){
                 res.send(data);
+            } else {
+                res.status(500).send(error);
             }
         });
     });
