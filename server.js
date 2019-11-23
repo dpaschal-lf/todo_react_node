@@ -18,6 +18,10 @@ server.get('/api/items/:id', (req,res)=>{
     res.send({"title":"get eggs","added":"2019-07-02 00:00:00","id":"2","completed":"completed","description":"the big eggs"});
 })
 
+server.delete('/api/items/:id', (req,res)=>{
+    res.send(200);
+})
+
 server.listen(5000, ()=>{
     console.log('server operational');
 })
