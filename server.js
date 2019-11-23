@@ -16,6 +16,7 @@ server.use(function (err, req, res, next) {
     try{
         throw new Error(err);
     } catch(error){
+        res.status(500).send('error in middleware -  ' + error);
         console.log('error in middleware -  ' + error);
     }
 });
