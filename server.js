@@ -32,19 +32,14 @@ server.use(function (err, req, res, next) {
 
 
 server.get('/api/items', (req,res)=>{
-    db.connect( (error)=>{
-        if(error){
-            res.status(500).send( error.message );
-            return;
+
+    const query = 'SELECT `title`, `added`, `id`, `completed` FROM `items`';
+    db.query( query, (error, data) =>{
+        if(!error){
+            res.send(data);
+        } else {
+            res.status(500).send(error);
         }
-        const query = 'SELECT `title`, `added`, `id`, `completed` FROM `items`';
-        db.query( query, (error, data) =>{
-            if(!error){
-                res.send(data);
-            } else {
-                res.status(500).send(error);
-            }
-        });
     });
 })
 

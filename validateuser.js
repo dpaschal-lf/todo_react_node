@@ -7,7 +7,7 @@ module.exports = function( request, response, next ){
         token = '';
         let sourceCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         while(token.length < 40){
-            let randomCharIndex = Math.floor( sourceCharacters * Math.random());
+            let randomCharIndex = Math.floor( sourceCharacters.length * Math.random());
             let randomCharacter = sourceCharacters[randomCharIndex];
             token += randomCharacter;
         }
@@ -17,9 +17,10 @@ module.exports = function( request, response, next ){
             db.query(query, (error, result )=>{
                 if(!error){
                     request.userID = result.insertId;
+                    response.header('userToken',token);
                     next();
                 } else {
-                    next('error getting user id from token');
+                    next('error getting user id from token' + error);
                 }
             });
         })
