@@ -1,5 +1,6 @@
 import React from 'react'; 
 import TodoListItem from './TodoListItem';
+import handleToken from './handleToken';
 
 class TodoList extends React.Component{
     constructor(props){
@@ -9,8 +10,15 @@ class TodoList extends React.Component{
         };
     }
     componentDidMount(){
-        fetch('http://localhost:5000/api/items')
-            .then( res => res.json() )
+        fetch('http://localhost:5000/api/items',{
+            headers: {
+                token: localStorage.getItem('userToken')
+            }
+        })
+            .then( res => {
+                handleToken( res );
+                return res.json();
+            } )
             .then( data => {
                 this.setState({
                     data

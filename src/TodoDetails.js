@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
+import handleToken from './handleToken';
 
 class TodoDetails extends React.Component{
     constructor(props){
@@ -10,8 +10,15 @@ class TodoDetails extends React.Component{
         }
     }
     componentDidMount(){
-        fetch('http://localhost:5000/api/items/'+this.props.match.params.id)
-            .then( res => res.json() )
+        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+            headers: {
+                token: localStorage.getItem('userToken')
+            }
+        })
+            .then( res => {
+                handleToken( res );
+                return res.json();
+             })
             .then( data => {
                 this.setState({
                     data
@@ -20,9 +27,13 @@ class TodoDetails extends React.Component{
     }
     handleDelete(){
         fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
-            method:'POST'
+            method:'POST',
+            headers: {
+                token: localStorage.getItem('userToken')
+            }
         })
             .then( ()=>{
+                handleToken( res );
                 this.props.history.push('/list');
             } )
 
