@@ -9,7 +9,7 @@ const staticModule = express.static(path.normalize(__dirname+'../public'));
 server.use( staticModule );
 server.use( cors() );
 
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const mysqlCredentials = require('./credentials.js');
 const db = mysql.createConnection( mysqlCredentials );
 
