@@ -6,6 +6,7 @@ class TodoCreate extends React.Component{
         super(props);
         this.updateFormElement= this.updateFormElement.bind( this );
         this.saveItem = this.saveItem.bind( this );
+        this.cancelItem = this.cancelItem.bind( this );
         this.state = {
             form: {
                 title: '',
@@ -22,6 +23,9 @@ class TodoCreate extends React.Component{
         this.setState( {
             form
         });
+    }
+    cancelItem(){
+        this.props.history.push('/list');
     }
     saveItem(){
         fetch('http://localhost:5000/api/items/',{
@@ -42,7 +46,8 @@ class TodoCreate extends React.Component{
             <div className="create">
                 <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title" placeholder="title"/>
                 <input onChange={this.updateFormElement} type="text" name="description" value={this.state.form.description} className="description" placeholder='description'/>
-                <div onClick={this.saveItem} className="button saveButton">save</div><div className="cancelButton button">cancel</div>            
+                <div onClick={this.saveItem} className="button saveButton">save</div>
+                <div onClick={this.cancelItem} className="cancelButton button">cancel</div>            
             </div>            
         );
     }
