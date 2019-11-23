@@ -10,7 +10,7 @@ const staticModule = express.static(path.normalize(__dirname+'../public'));
 
 server.use( staticModule );
 server.use( cors() );
-server.use( bodyParser.json({ extended: false}) );
+server.use( bodyParser.json() );
 
 const mysql = require('mysql');
 const mysqlCredentials = require('./credentials.js');
