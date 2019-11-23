@@ -7,10 +7,16 @@ const server = express();
 
 const staticModule = express.static(path.normalize(__dirname+'../public'));
 //const bodyParser = express.bodyParser();
-
 server.use( staticModule );
 server.use( cors() );
 server.use( bodyParser.json() );
+server.use(function (err, req, res, next) {
+    try{
+        throw new Error(err);
+    } catch(error){
+        console.log('error in middleware -  ' + error);
+    }
+});
 
 const mysql = require('mysql');
 const mysqlCredentials = require('./credentials.js');
