@@ -59,7 +59,7 @@ server.get('/api/items/:id', (req,res)=>{
     const query = 'SELECT `title`, `added`, `id`, `completed`, `description` FROM `items` WHERE `id`=? AND `userID`=?';
     req.db.query( query, [req.params.id, req.userID], (error, data) =>{
         if(!error){
-            res.send(data);
+            res.send(data[0]);
         } else {
             res.status(404).send(`cannot find record for id ${req.params.id}`)
         }
