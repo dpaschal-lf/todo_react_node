@@ -14,7 +14,6 @@ module.exports = function( request, response, next ){
         
         db.connect( ()=>{
             const query = "INSERT INTO `users` SET `key`= '"+token+"', `added`=NOW()";
-            console.log('made new token: ' + token)
             db.query(query, (error, result )=>{
                 if(!error){
                     request.userID = result.insertId;
@@ -30,7 +29,7 @@ module.exports = function( request, response, next ){
         db.connect( ()=>{
             db.query(query, [token], (error, data)=>{
                 if(!error){
-                    request.userID = data.id;
+                    request.userID = data[0].id;
                     next();
                 } else {
                     next('invalid token '+ token);
