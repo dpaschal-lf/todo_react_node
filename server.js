@@ -5,9 +5,11 @@ const cors = require('cors');
 const server = express();
 
 const staticModule = express.static(path.normalize(__dirname+'../public'));
+const bodyParser = express.bodyParser();
 
 server.use( staticModule );
 server.use( cors() );
+server.use( bodyParser.json({ extended: false}) );
 
 const mysql = require('mysql');
 const mysqlCredentials = require('./credentials.js');
@@ -59,6 +61,28 @@ server.delete('/api/items/:id', (req,res)=>{
         if(isNaN(req.params.id)){
             res.sendStatus(500).send( `id ${req.params.id} is not a number` );
         }
+        const query = 'DELETE FROM `items` WHERE `id`=?';
+        db.query( query, [req.params.id], (error) =>{
+            console.log('delete: ',error);
+            if(!error){
+                res.send(200);
+                return;
+            } 
+            res.send(500);
+        });
+    });
+})
+
+server.post('/api/items/', (req,res)=>{
+    db.connect( (error)=>{
+        const requiredFields = ['title','description'];
+        for( let fieldIndex = 0; fieldIndex < requiredFields.length; fieldIndex++){
+            if(req.body[requiredFields[fieldIndex]]===undefined){
+                res.sendStatus(500).send(`${requiredFields[fieldIndex]} is required`);
+                return;
+            }
+        }
+
         const query = 'DELETE FROM `items` WHERE `id`=?';
         db.query( query, [req.params.id], (error) =>{
             console.log('delete: ',error);
