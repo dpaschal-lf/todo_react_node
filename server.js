@@ -60,7 +60,8 @@ server.delete('/api/items/:id', (req,res)=>{
             res.status(500).send( `id ${req.params.id} is not a number` );
         }
         const query = 'DELETE FROM `items` WHERE `id`=?';
-        db.query( query, [this.params.id], (error, data) =>{
+        db.query( query, [req.params.id], (error) =>{
+            console.log('delete: ',error);
             if(!error){
                 res.send(200);
                 return;
