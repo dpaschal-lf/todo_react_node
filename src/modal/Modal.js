@@ -7,15 +7,16 @@ class Modal extends React.Component{
         this.close = this.close.bind(this);
         this.state ={
             data: {},
-            display: this.props.display === undefined ? false : this.props.display
+            display: this.props.display
         }
     }
     componentDidUpdate( oldProps, oldState ){
-        // if(oldProps.display === this.props.display){
-        //     this.setState({
-        //         display: this.props.display
-        //     })
-        // }
+        debugger;
+        if(oldProps.display !== this.props.display){
+            this.setState({
+                display: this.props.display
+            })
+        }
     }
     close(){
         this.props.closeCallback();
@@ -25,7 +26,7 @@ class Modal extends React.Component{
     }
     render(){
         return(
-            <div className="modal shadow" style={{display: this.props.display ? 'black' : 'none' }}>
+            <div className="modal shadow" style={{display: this.props.display ? 'block' : 'none' }}>
                 <div className="body">
                     <div className="close" onClick={this.close}>X</div>
                     <div className="content">{this.props.children}</div>
