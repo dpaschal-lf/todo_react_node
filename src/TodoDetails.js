@@ -28,22 +28,22 @@ class TodoDetails extends React.Component{
     }
     handleDelete(){
         fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
-            method:'POST',
+            method:'DELETE',
             headers: {
                 token: localStorage.getItem('userToken')
             }
         })
-            .then( (res)=>{
-                handleToken( res );
-                this.props.history.push('/list');
-            } )
+        .then( (res)=>{
+            handleToken( res );
+            this.props.history.push('/list');
+        } )
 
     }
     render(){
         return (
             <div className="details">
                 <div className="titleControls">
-        <div className="title">{this.state.data.title}</div>
+                    <div className="title">{this.state.data.title}</div>
                     <div className="controls">
                         <input value="completed" name="completed" className="completeCheckbox updatable" type="checkbox"/>
                         <div className="delete button">Delete</div>
