@@ -86,8 +86,8 @@ server.post('/api/items/', (req,res)=>{
             }
         }
 
-        const query = 'DELETE FROM `items` WHERE `id`=?';
-        db.query( query, [req.params.id], (error) =>{
+        const query = 'INSERT INTO `items` SET `title`=?, `description`=?, `userID`=0, `added`=NOW(), `completed`="active"';
+        db.query( query, [req.body.title, req.body.description], (error) =>{
             console.log('delete: ',error);
             if(!error){
                 res.sendStatus(200);
