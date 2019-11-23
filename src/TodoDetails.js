@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 
 class TodoDetails extends React.Component{
@@ -17,6 +18,15 @@ class TodoDetails extends React.Component{
                 });
             })
     }
+    handleDelete(){
+        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+            method:'POST'
+        })
+            .then( ()=>{
+                this.props.history.push('/list');
+            } )
+
+    }
     render(){
         return (
             <div className="details">
@@ -29,10 +39,6 @@ class TodoDetails extends React.Component{
                 </div>
                 <div name="description" className="description">{this.state.data.description}</div>
                 <input type="datetime-local" name="added" className="added" value={this.state.data.added}/>
-                <div className="updateControls hidden">
-                        <div className="saveButton button">save</div>
-                        <div className="cancelButton button">cancel</div>
-                </div>
             </div>
         );
     }
