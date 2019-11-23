@@ -2,6 +2,7 @@
 module.exports = function( request, response, next ){
     let token = request.header('token');
     let userID = null
+    const db= request.db;
     if(token === undefined){
         token = '';
         let sourceCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -13,7 +14,7 @@ module.exports = function( request, response, next ){
         
         db.connect( ()=>{
             const query = "INSERT INTO `users` SET `key`= '"+token+"', `added`=NOW()";
-            db.query($query, (error, result )=>{
+            db.query(query, (error, result )=>{
                 if(!error){
                     request.userID = result.insertId;
                     next();
@@ -24,7 +25,7 @@ module.exports = function( request, response, next ){
         })
     } else {
         const query = 'SELECT `id` FROM `users` WHERE `key` = ?';
-        db.query($query, [$token], (error, data)=>{
+        db.query(query, [$token], (error, data)=>{
             if(!error){
                 request.userID = data.id;
                 next();

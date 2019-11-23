@@ -6,8 +6,16 @@ const validateUser = require('./validateuser.js');
 
 const server = express();
 
+const mysql = require('mysql');
+const mysqlCredentials = require('./credentials.js');
+const db = mysql.createConnection( mysqlCredentials );
+
 const staticModule = express.static(path.normalize(__dirname+'../public'));
 //const bodyParser = express.bodyParser();
+server.use( (req, res, next )=>{
+    req.db = db;
+    next();
+})
 server.use( staticModule );
 server.use( cors() );
 server.use( bodyParser.json() );
@@ -21,9 +29,7 @@ server.use(function (err, req, res, next) {
     }
 });
 
-const mysql = require('mysql');
-const mysqlCredentials = require('./credentials.js');
-const db = mysql.createConnection( mysqlCredentials );
+
 
 server.get('/api/items', (req,res)=>{
     db.connect( (error)=>{
