@@ -75,20 +75,49 @@ server.delete('/api/items/:id', (req,res)=>{
 })
 
 server.post('/api/items/', (req,res)=>{
-    
+    if(isNaN(req.params.id)){
+        res.status(500).send( `id ${req.params.id} is not a number` );
+    }   
     db.connect( (error)=>{
         const requiredFields = ['title','description'];
         for( let fieldIndex = 0; fieldIndex < requiredFields.length; fieldIndex++){
-            console.log(req.body);
             if(req.body[requiredFields[fieldIndex]]===undefined){
                 res.status(500).send(`${requiredFields[fieldIndex]} is required`);
                 return;
             }
         }
-
         const query = 'INSERT INTO `items` SET `title`=?, `description`=?, `userID`=0, `added`=NOW(), `completed`="active"';
         db.query( query, [req.body.title, req.body.description], (error) =>{
-            console.log('delete: ',error);
+            if(!error){
+                res.sendStatus(200);
+                return;
+            } 
+            res.sendStatus(500);
+        });
+    });
+})
+
+server.put('/api/items/:id', (req,res)=>{
+    if(isNaN(req.params.id)){
+        res.status(500).send( `id ${req.params.id} is not a number` );
+    }
+    db.connect( (error)=>{
+        const changeableFields = ['title','description', 'completed'];
+        let query = 'UPDATE `items` SET ';
+        const validFields = changeableFields.filter( field=> req.body.hasOwnProperty(field));
+        const validValues = [];
+        if(validFields.length===0){
+            res.status(500).send('data must haveat least 1 field to change')
+        }
+        validFields.forEach( field => {
+            query += '`'+field+'`=?,';
+            validValues.push( req.body[field]);
+        });
+        query = query.slice(0,-1) + ' WHERE `id` = ?';
+        validValues.push(req.params.id);
+
+
+        db.query( query, validValues , (error) =>{
             if(!error){
                 res.sendStatus(200);
                 return;
