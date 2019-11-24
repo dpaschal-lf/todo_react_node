@@ -57,10 +57,9 @@ class TodoDetails extends React.Component{
             handleToken( res );
             this.props.history.push('/list');
         } )
-
     }
     edit(){
-
+        this.props.history.push('/edit/' + this.props.match.params.id );
     }
     render(){
         return (

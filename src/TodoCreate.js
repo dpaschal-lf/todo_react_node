@@ -11,7 +11,31 @@ class TodoCreate extends React.Component{
             form: {
                 title: '',
                 description: ''
-            }
+            },
+            edit: false
+        }
+    }
+    componentDidMount(){
+        if(this.props.match.params.id){
+            fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+                headers: {
+                    token: localStorage.getItem('userToken')
+                }
+            })
+                .then( res => {
+                    handleToken( res );
+                    return res.json();
+                 })
+                .then( data => {
+                    this.setState({
+                        form:{
+                            title: data.title,
+                            description: data.description,
+                            completed: data.completed
+                        },
+                        edit: true
+                    });
+                })
         }
     }
     updateFormElement(e){
@@ -42,14 +66,19 @@ class TodoCreate extends React.Component{
         } )        
     }
     render(){
-        return(
-            <div className="create">
-                <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title" placeholder="title"/>
-                <input onChange={this.updateFormElement} type="text" name="description" value={this.state.form.description} className="description" placeholder='description'/>
-                <div onClick={this.saveItem} className="button saveButton">save</div>
-                <div onClick={this.cancelItem} className="cancelButton button">cancel</div>            
-            </div>            
-        );
+        if(this.state.edit){
+
+        } else {
+            return(
+                <div className="create">
+                    <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title" placeholder="title"/>
+                    <input onChange={this.updateFormElement} type="text" name="description" value={this.state.form.description} className="description" placeholder='description'/>
+                    <div onClick={this.saveItem} className="button saveButton">save</div>
+                    <div onClick={this.cancelItem} className="cancelButton button">cancel</div>            
+                </div>            
+            );
+        }
+
     }
 }
 
