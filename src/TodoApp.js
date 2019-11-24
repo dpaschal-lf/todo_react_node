@@ -10,13 +10,13 @@ class TodoApp extends React.Component{
     super(props);
     this.menu = {
       'list' : [
-        <Link className="navLink" key='create' to="/create">+</Link>
+        <Link className="navLink btn btn-success" key='create' to="/create">+</Link>
       ],
       'create': [
-        <Link className="navLink" key='list' to="/list">Back</Link>
+        <Link className="navLink btn btn-primary" key='list' to="/list">Back</Link>
       ],
       'details': [
-        <Link className="navLink" key='list' to="/list">Back</Link>,
+        <Link className="navLink btn btn-primary" key='list' to="/list">Back</Link>,
       ]
     }
     this.menu[''] = this.menu['list']

@@ -60,15 +60,15 @@ class TodoDetails extends React.Component{
     }
     render(){
         return (
-            <div className="details">
-                <div className="titleControls">
-                    <div className="title">{this.state.data.title}</div>
-                    <div className="controls">
-                        <input value="completed" name="completed" className="completeCheckbox updatable" type="checkbox"/>
-                        <div className="delete button" onClick={this.confirmDelete}>Delete</div>
+            <div className="details justify-content-around">
+                <div className="titleControls row text-light bg-dark">
+                    <div className="title col-8 h3 align-middle">{this.state.data.title}</div>
+                    <div className="controls col-4 form-group">
+                        <label className="col-6">Complete:<input value="completed" name="completed" className="completeCheckbox" type="checkbox"/></label>
+                        <div className="btn btn-danger col-offset-2 col-4" onClick={this.confirmDelete}>Delete</div>
                     </div>
                 </div>
-                <div name="description" className="description">{this.state.data.description}</div>
+                <div name="description" className="description blockquote border">{this.state.data.description}</div>
                 <input type="datetime-local" name="added" className="added" value={this.state.data.added}/>
                 <Modal closeCallback={this.hideModal} display={this.state.modalMessage!==null}>
                     {this.state.modalMessage}
