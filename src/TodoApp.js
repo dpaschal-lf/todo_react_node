@@ -17,7 +17,6 @@ class TodoApp extends React.Component{
       ],
       'details': [
         <Link className="navLink" key='list' to="/list">Back</Link>,
-        <Link className="navLink" key='delete' to="/delete">Delete</Link>
       ]
     }
     this.menu[''] = this.menu['list']

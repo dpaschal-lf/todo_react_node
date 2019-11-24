@@ -46,7 +46,6 @@ class TodoDetails extends React.Component{
         })
     }
     handleDelete(){
-        debugger;
         fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
             method:'DELETE',
             headers: {
