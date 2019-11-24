@@ -9,6 +9,7 @@ class TodoDetails extends React.Component{
         this.hideModal = this.hideModal.bind( this );
         this.confirmDelete = this.confirmDelete.bind( this );
         this.handleDelete = this.handleDelete.bind( this );
+        this.edit = this.edit.bind( this );
         this.state ={
             data: {},
             modalMessage: null
@@ -58,14 +59,18 @@ class TodoDetails extends React.Component{
         } )
 
     }
+    edit(){
+
+    }
     render(){
         return (
             <div className="details justify-content-around">
                 <div className="titleControls row text-light bg-dark">
-                    <div className="title col-8 h3 align-middle">{this.state.data.title}</div>
-                    <div className="controls col-4 form-group">
-                        <label className="col-6">Complete:<input value="completed" name="completed" className="completeCheckbox" type="checkbox"/></label>
-                        <div className="btn btn-danger col-offset-2 col-4" onClick={this.confirmDelete}>Delete</div>
+                    <div className="title col-6 h3 align-middle">{this.state.data.title}</div>
+                    <div className="controls col-6 form-group">
+                        <label className="col-4">Complete:<input value="completed" name="completed" className="completeCheckbox" type="checkbox"/></label>
+                        <div className="btn btn-danger col-4" onClick={this.confirmDelete}>Delete</div>
+                        <div className="btn col-4 btn-info" onClick={this.edit}><i className="fa fa-edit"></i></div>
                     </div>
                 </div>
                 <div name="description" className="description blockquote border">{this.state.data.description}</div>
