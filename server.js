@@ -74,7 +74,7 @@ server.delete('/api/items/:id', (req,res)=>{
     req.db.query( query, [req.params.id, req.userID], (error) =>{
         console.log('delete: ',error);
         if(!error){
-            res.sendState(200);
+            res.sendStatus(200);
             return;
         } 
         res.sendStatus(500);
