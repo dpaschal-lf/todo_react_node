@@ -7,7 +7,7 @@ export default props => {
         e.stopPropagation();
         const element = e.target;
         const checkedValue = element.checked ? 'checked' : 'active';
-        this.props.completeUpdateCallback( props.data.id, checkedValue );
+        props.completeUpdateCallback( props.data.id, checkedValue );
     }
     return (
         <Link to={`/details/${props.data.id}`} className="todoListItem row">

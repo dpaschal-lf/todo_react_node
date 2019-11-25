@@ -14,23 +14,21 @@ class TodoList extends React.Component{
         this.loadListData();
     }
     changeItemComplete( id, complete ){
-        putItem(){
-            fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
-                method:'PUT',
-                body: JSON.stringify( {
-                    id,
-                    complete
-                } ),
-                headers: {
-                    token: localStorage.getItem('userToken'),
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then( (res)=>{
-                handleToken( res );
-                this.loadListData();
-            } )        
-        }        
+        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+            method:'PUT',
+            body: JSON.stringify( {
+                id,
+                complete
+            } ),
+            headers: {
+                token: localStorage.getItem('userToken'),
+                'Content-Type': 'application/json',
+            }
+        })
+        .then( (res)=>{
+            handleToken( res );
+            this.loadListData();
+        } )              
     }
     loadListData(){
         fetch('http://localhost:5000/api/items',{
