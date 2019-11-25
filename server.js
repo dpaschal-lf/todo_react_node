@@ -108,7 +108,7 @@ server.put('/api/items/:id', (req,res)=>{
     const validFields = changeableFields.filter( field=> req.body.hasOwnProperty(field));
     const validValues = [];
     if(validFields.length===0){
-        res.status(500).send('data must haveat least 1 field to change')
+        res.status(500).send('data must haveat least 1 field to change');
     }
     validFields.forEach( field => {
         query += '`'+field+'`=?,';
@@ -117,13 +117,13 @@ server.put('/api/items/:id', (req,res)=>{
     query = query.slice(0,-1) + ' WHERE `id` = ?';
     validValues.push(req.params.id);
 
-
+    console.log(query);
     req.db.query( query, validValues , (error) =>{
         if(!error){
             res.sendStatus(200);
             return;
         } 
-        res.sendStatus(500);
+        res.status(500).send(error);
     });
 })
 

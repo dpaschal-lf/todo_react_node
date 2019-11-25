@@ -6,7 +6,7 @@ export default props => {
     const handleCompleteToggle = ( e )=>{
         e.stopPropagation();
         const element = e.target;
-        const checkedValue = element.checked ? 'checked' : 'active';
+        const checkedValue = element.checked ? 'completed' : 'active';
         props.completeUpdateCallback( props.data.id, checkedValue );
     }
     return (

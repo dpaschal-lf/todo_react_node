@@ -13,12 +13,13 @@ class TodoList extends React.Component{
     componentDidMount(){
         this.loadListData();
     }
-    changeItemComplete( id, complete ){
-        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+    changeItemComplete( id, completed ){
+        debugger;
+        fetch('http://localhost:5000/api/items/'+id,{
             method:'PUT',
             body: JSON.stringify( {
                 id,
-                complete
+                completed
             } ),
             headers: {
                 token: localStorage.getItem('userToken'),
