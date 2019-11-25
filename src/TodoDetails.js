@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import handleToken from './handleToken';
 import Modal from './modal/Modal.js';
+import {getMonth, getDayOfWeek, getOrdinal} from './dateConvert.js';
 
 class TodoDetails extends React.Component{
     constructor(props){
@@ -62,6 +63,8 @@ class TodoDetails extends React.Component{
         this.props.history.push('/edit/' + this.props.match.params.id );
     }
     render(){
+        const dateObject = new Date(this.state.data.added);
+        const formattedDate = `${getDayOfWeek(dateObject)}, ${getMonth(dateObject)} ${dateObject.getDate()}${getOrdinal(dateObject.getDate())}, ${dateObject.getFullYear()}`;
         return (
             <div className="details justify-content-around">
                 <div className="titleControls row text-light bg-dark">
@@ -73,7 +76,7 @@ class TodoDetails extends React.Component{
                     </div>
                 </div>
                 <div name="description" className="description blockquote border">{this.state.data.description}</div>
-                <input type="datetime-local" name="added" className="added" value={this.state.data.added}/>
+                <div>{formattedDate}</div>
                 <Modal closeCallback={this.hideModal} display={this.state.modalMessage!==null}>
                     {this.state.modalMessage}
                 </Modal>
