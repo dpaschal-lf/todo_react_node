@@ -89,21 +89,44 @@ class TodoCreate extends React.Component{
     render(){
         if(this.state.edit){
             return (
-                <div className="edit">
-                    <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title" placeholder="title"/>
-                    <input onChange={this.updateFormElement} type="text" name="description" value={this.state.form.description} className="description" placeholder='description'/>
-                    <label className="col-4">Complete:<input value="completed" name="completed" className="completeCheckbox" type="checkbox"/></label>
-                    <div onClick={this.saveItem} className="button saveButton">save</div>
-                    <div onClick={this.cancelItem} className="cancelButton button">cancel</div>            
-                </div>  
+                <div className="create-edit edit">
+                    <div className='row'>
+                        <div className="form-group col-8">
+                            <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title form-control" placeholder="title"/>
+                        </div>
+                        <div className="form-group col-2">
+                            <input id="completedCheckBox" value="completed" name="completed" className="completeCheckbox form-check-input col-4" type="checkbox"/>
+                            <label for="completedCheckbox" className="col-8 form-check-label">Complete</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-8">
+                            <textarea onChange={this.updateFormElement} name="description" value={this.state.form.description} className="description form-control" placeholder='description'></textarea>
+                        </div>   
+                        <div className="form-group col-4">
+                            <div onClick={this.saveItem} className="btn btn-success saveButton">save</div>
+                            <div onClick={this.cancelItem} className="cancelButton btn btn-warning">cancel</div> 
+                        </div>        
+                    </div>
+                </div>
             );
         } else {
             return(
-                <div className="create">
-                    <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title" placeholder="title"/>
-                    <input onChange={this.updateFormElement} type="text" name="description" value={this.state.form.description} className="description" placeholder='description'/>
-                    <div onClick={this.saveItem} className="button saveButton">save</div>
-                    <div onClick={this.cancelItem} className="cancelButton button">cancel</div>            
+                <div className="create-edit create">
+                    <div className='row'>
+                        <div className="form-group col-12">
+                            <input onChange={this.updateFormElement} type="text" name="title" value={this.state.form.title} className="title form-control" placeholder="title"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-8">
+                            <textarea onChange={this.updateFormElement} name="description" value={this.state.form.description} className="description form-control" placeholder='description'></textarea>
+                        </div>   
+                        <div className="form-group col-4">
+                            <div onClick={this.saveItem} className="btn btn-success saveButton">save</div>
+                            <div onClick={this.cancelItem} className="cancelButton btn btn-warning">cancel</div> 
+                        </div>        
+                    </div>     
                 </div>            
             );
         }

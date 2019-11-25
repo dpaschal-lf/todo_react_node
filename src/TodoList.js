@@ -14,7 +14,6 @@ class TodoList extends React.Component{
         this.loadListData();
     }
     changeItemComplete( id, completed ){
-        debugger;
         fetch('http://localhost:5000/api/items/'+id,{
             method:'PUT',
             body: JSON.stringify( {
