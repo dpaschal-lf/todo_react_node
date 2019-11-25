@@ -5,6 +5,7 @@ import handleToken from './handleToken';
 class TodoList extends React.Component{
     constructor(props){
         super(props);
+        this.changeItemComplete = this.changeItemComplete.bind( this );
         this.state = {
             data: []
         };
@@ -25,11 +26,14 @@ class TodoList extends React.Component{
                 });
             })
     }
+    changeItemComplete( id, currentState ){
+
+    }
     render(){
         return(<div>
             { !this.state.data.length 
                 ? 'no data available' 
-                : this.state.data.map( data=> <TodoListItem data={data} key={data.id}/> )
+                : this.state.data.map( data=> <TodoListItem data={data} key={data.id} completeUpdateCallback={this.changeItemComplete}/> )
             }
         </div>)
     }
