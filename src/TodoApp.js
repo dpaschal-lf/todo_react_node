@@ -36,7 +36,7 @@ class TodoApp extends React.Component{
           <Route path='/edit/:id' component={TodoCreate}/ >
           <Route path='/details/:id' component={TodoDetails}/ >
         </Switch>
-        <footer>instructions</footer>
+        <footer></footer>
       </div>
     );
   }
