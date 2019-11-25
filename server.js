@@ -109,6 +109,7 @@ server.put('/api/items/:id', (req,res)=>{
     const validValues = [];
     if(validFields.length===0){
         res.status(500).send('data must haveat least 1 field to change');
+        return;
     }
     validFields.forEach( field => {
         query += '`'+field+'`=?,';
