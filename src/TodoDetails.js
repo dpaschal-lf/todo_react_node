@@ -27,7 +27,6 @@ class TodoDetails extends React.Component{
                 return res.json();
              })
             .then( data => {
-                console.log("got it!", data);
                 this.setState({
                     data
                 });
