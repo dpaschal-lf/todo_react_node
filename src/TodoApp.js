@@ -23,7 +23,6 @@ class TodoApp extends React.Component{
   }
   render(){
     const pathParts = this.props.location.pathname.split('/');
-    console.log( "path: ", this.props.location.pathname)
     const currentMenu = this.menu[ pathParts[1] ];
     return(
       <div className="todoApp">
