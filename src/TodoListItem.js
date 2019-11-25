@@ -17,7 +17,7 @@ export default props => {
             <div className="title col-sm-5">{props.data.title}</div>
             <div className="added col-sm-5">{formattedDate}</div>
             <div className="controlArea col-sm-2">
-                <input onClick={handleCompleteToggle} type="checkbox" checked={props.data.completed ==='completed'?'checked':''}/>
+                <input onClick={e=> e.stopPropagation() } onChange={handleCompleteToggle} type="checkbox" checked={props.data.completed ==='completed'?'checked':''}/>
             </div>
         </Link>
     )
