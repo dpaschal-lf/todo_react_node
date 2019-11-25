@@ -11,6 +11,12 @@ class TodoList extends React.Component{
         };
     }
     componentDidMount(){
+        this.loadListData();
+    }
+    changeItemComplete( id, currentState ){
+
+    }
+    loadListData(){
         fetch('http://localhost:5000/api/items',{
             headers: {
                 token: localStorage.getItem('userToken')
@@ -24,10 +30,7 @@ class TodoList extends React.Component{
                 this.setState({
                     data
                 });
-            })
-    }
-    changeItemComplete( id, currentState ){
-
+            })        
     }
     render(){
         return(<div>
