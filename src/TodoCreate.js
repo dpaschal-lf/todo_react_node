@@ -17,7 +17,7 @@ class TodoCreate extends React.Component{
     }
     componentDidMount(){
         if(this.props.match.params.id){
-            fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+            fetch('/api/items/'+this.props.match.params.id,{
                 headers: {
                     token: localStorage.getItem('userToken')
                 }
@@ -59,7 +59,7 @@ class TodoCreate extends React.Component{
         }
     }
     postItem(){
-        fetch('http://localhost:5000/api/items/',{
+        fetch('/api/items/',{
             method:'POST',
             body: JSON.stringify( this.state.form ),
             headers: {
@@ -73,7 +73,7 @@ class TodoCreate extends React.Component{
         } )        
     }
     putItem(){
-        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+        fetch('/api/items/'+this.props.match.params.id,{
             method:'PUT',
             body: JSON.stringify( this.state.form ),
             headers: {

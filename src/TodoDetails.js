@@ -17,7 +17,7 @@ class TodoDetails extends React.Component{
         }
     }
     componentDidMount(){
-        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+        fetch('/api/items/'+this.props.match.params.id,{
             headers: {
                 token: localStorage.getItem('userToken')
             }
@@ -47,7 +47,7 @@ class TodoDetails extends React.Component{
         })
     }
     handleDelete(){
-        fetch('http://localhost:5000/api/items/'+this.props.match.params.id,{
+        fetch('/api/items/'+this.props.match.params.id,{
             method:'DELETE',
             headers: {
                 token: localStorage.getItem('userToken')

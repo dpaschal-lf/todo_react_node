@@ -14,7 +14,7 @@ class TodoList extends React.Component{
         this.loadListData();
     }
     changeItemComplete( id, completed ){
-        fetch('http://localhost:5000/api/items/'+id,{
+        fetch('/api/items/'+id,{
             method:'PUT',
             body: JSON.stringify( {
                 id,
@@ -31,7 +31,7 @@ class TodoList extends React.Component{
         } )              
     }
     loadListData(){
-        fetch('http://localhost:5000/api/items',{
+        fetch('/api/items',{
             headers: {
                 token: localStorage.getItem('userToken')
             }
