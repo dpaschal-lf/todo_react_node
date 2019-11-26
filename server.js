@@ -72,7 +72,6 @@ server.delete('/api/items/:id', (req,res)=>{
     }
     const query = 'DELETE FROM `items` WHERE `id`=? AND `userID`=?';
     req.db.query( query, [req.params.id, req.userID], (error) =>{
-        console.log('delete: ',error);
         if(!error){
             res.sendStatus(200);
             return;
