@@ -10,7 +10,7 @@ const mysql = require('mysql');
 const mysqlCredentials = require('./credentials.js');
 const db = mysql.createConnection( mysqlCredentials );
 
-const staticModule = express.static(path.normalize(__dirname+'../public'));
+const staticModule = express.static(path.normalize(__dirname+'../build'));
 //const bodyParser = express.bodyParser();
 server.use( (req, res, next )=>{
     req.db = db;
@@ -38,7 +38,6 @@ server.use(function (err, req, res, next) {
     }
 });
 
-server.use( express.static( __dirname + '/build'));
 
 
 
@@ -125,6 +124,10 @@ server.put('/api/items/:id', (req,res)=>{
         } 
         res.status(500).send(error);
     });
+})
+
+server.use((req,res)=>{
+    res.sendFile(__dirname+'/build/index.html');
 })
 
 server.listen(5000, ()=>{
