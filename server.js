@@ -38,6 +38,8 @@ server.use(function (err, req, res, next) {
     }
 });
 
+server.use( express.static( __dirname + '/build'));
+
 
 
 server.get('/api/items', (req,res)=>{
