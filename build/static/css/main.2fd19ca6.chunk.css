@@ -1,0 +1,2 @@
+body{margin:0;font-family:sans-serif}.App{text-align:center}.todoApp{margin:8px}.modal.shadow{position:fixed;left:0;top:0;width:100vw;height:100vh;background-color:rgba(0,0,0,.4)}.modal .body{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);padding:2%;background-color:#fff;display:flex}.modal .content{margin:auto;display:inline-block;text-align:center}.modal .close{position:absolute;right:0;top:0;background-color:#000;color:#fff;padding:1px;cursor:pointer}
+/*# sourceMappingURL=main.2fd19ca6.chunk.css.map */
